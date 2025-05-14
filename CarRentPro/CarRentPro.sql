@@ -1,0 +1,119 @@
+CREATE DATABASE car_rental_db;
+USE car_rental_db;
+
+CREATE TABLE admin (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    admin_name VARCHAR(50) NOT NULL,
+    admin_id VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL
+);
+SELECT * FROM admin;
+SELECT admin_name, admin_id, password FROM admin WHERE admin_id = 'your_admin_id';
+CREATE TABLE customer2 (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    mobile VARCHAR(15),
+    email VARCHAR(100),
+    address TEXT,
+    license_no VARCHAR(50),
+    gender ENUM('Male', 'Female', 'Other'),
+    dob DATE,
+    license_expiry DATE
+);
+SELECT * FROM customer2;
+CREATE TABLE car (
+    car_id INT AUTO_INCREMENT PRIMARY KEY,
+    car_name VARCHAR(100) NOT NULL,
+    model_name VARCHAR(100) NOT NULL,
+    purchase_date DATE NOT NULL,
+    condition_type ENUM('New', 'Good', 'Best', 'Average') NOT NULL,
+    insurance ENUM('Yes', 'No') NOT NULL,
+    insurance_expiry_date DATE,
+    
+);
+CREATE TABLE car_images (
+    image_id INT AUTO_INCREMENT PRIMARY KEY,
+    car_id INT NOT NULL,
+    image_path VARCHAR(255) NOT NULL,
+    FOREIGN KEY (car_id) REFERENCES car(car_id) ON DELETE CASCADE
+);
+
+select * from car;
+CREATE TABLE organization_employee (
+    employee_id INT AUTO_INCREMENT PRIMARY KEY,
+    org_name VARCHAR(100) NOT NULL,
+    contact VARCHAR(15),
+    email VARCHAR(100),
+    position VARCHAR(100),
+    price_per_month DECIMAL(10, 2),
+    rental_duration INT, -- Duration in months
+    request_status ENUM('Pending', 'Approved', 'Rejected') DEFAULT 'Pending'
+);
+
+CREATE TABLE rental_contract (
+    contract_id INT AUTO_INCREMENT PRIMARY KEY,
+    car_id INT NOT NULL,
+    employee_id INT NOT NULL,
+    customer_id INT NOT NULL,
+    start_date DATE,
+    end_date DATE,
+    FOREIGN KEY (car_id) REFERENCES carr(car_id),
+    FOREIGN KEY (employee_id) REFERENCES organization_employee(employee_id),
+    FOREIGN KEY (customer_id) REFERENCES customer2(customer_id)
+ 
+);
+
+CREATE TABLE car_images2 (
+    image_id INT AUTO_INCREMENT PRIMARY KEY,
+    car_id INT NOT NULL,
+    image_data BLOB NOT NULL,  -- Store the image as binary data (BLOB)
+    FOREIGN KEY (car_id) REFERENCES car(car_id) ON DELETE CASCADE
+);
+CREATE TABLE car2 (
+    car_id INT AUTO_INCREMENT PRIMARY KEY,
+    car_name VARCHAR(100) NOT NULL,
+    model_name VARCHAR(100) NOT NULL,
+    condition_type ENUM('New', 'Best', 'Good', 'Average') NOT NULL,
+    purchase_date DATE NOT NULL,
+    insurance ENUM('Yes', 'No') NOT NULL,
+    insurance_expiry_date DATE,
+    customer_id INT,
+    FOREIGN KEY (customer_id) REFERENCES customer2(customer_id) ON DELETE CASCADE
+);
+CREATE TABLE car_images4 (
+    image_id INT AUTO_INCREMENT PRIMARY KEY,
+    car_id INT NOT NULL,
+    image_path VARCHAR(255) NOT NULL,
+    FOREIGN KEY (car_id) REFERENCES car(car_id) ON DELETE CASCADE
+);
+DESCRIBE customer2;
+
+SHOW CREATE TABLE rental_contract;
+ALTER TABLE rental_contract DROP FOREIGN KEY car;
+ALTER TABLE rental_contract DROP FOREIGN KEY fk_old_car_constraint;
+ALTER TABLE rental_contract DROP FOREIGN KEY fk_car_id;
+
+CREATE TABLE rental_contract2 (
+    contract_id INT AUTO_INCREMENT PRIMARY KEY,
+    car_id INT NOT NULL,
+    employee_id INT NOT NULL,
+    customer_id INT NOT NULL,
+    start_date DATE,
+    end_date DATE,
+    FOREIGN KEY (car_id) REFERENCES car2(car_id),
+    FOREIGN KEY (employee_id) REFERENCES organization_employee(employee_id),
+    FOREIGN KEY (customer_id) REFERENCES customer2(customer_id)
+ 
+);
+
+SELECT customer_id, name, password FROM customer2 WHERE name = 'yourCustomerName' AND password = 'yourPassword';
+CREATE TABLE organization (
+    org_id INT AUTO_INCREMENT PRIMARY KEY,
+    org_name VARCHAR(100),
+    email VARCHAR(100),
+    contact VARCHAR(15),
+    password VARCHAR(255),
+    address TEXT
+);
+select * from organization;
