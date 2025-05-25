@@ -87,5 +87,3 @@ ystem Architecture
 - Organization rental request form
 - Rental contract approval/rejection system
 
-CarRentPro offers a comprehensive solution for managing commercial vehicle rentals within a peer-to-peer model. The system streamlines the interaction between vehicle owners and organizations through secure, automated workflows. Built with scalable Java architecture and a relational database, it is designed to meet the needs of organizations seeking transparency, data security, and long-term rental efficiency.
-Developed as part of an academic project, CarRentPro demonstrates full-stack Java application development with real-world utility.
