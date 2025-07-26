@@ -81,11 +81,6 @@ ystem Architecture
 
 - ### Sample Interface Modules
 
-- Admin login and dashboard
-- Customer registration and vehicle listing
-- Car registration with search and filter
-- Organization rental request form
-- Rental contract approval/rejection system
 
 
   
